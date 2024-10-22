@@ -16,13 +16,17 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1080, 1920);
+  createCanvas(720, 1280);
+  pixelDensity(1)
   frameRate(24);
   noSmooth();
   setInterval(spawnButton, spawnRate);
 }
 
 function draw() {
+
+requestAnimationFrame(draw);
+
   if (gameActive) {
     background(220);
     updateSpeedAndSpawnRate();
@@ -42,8 +46,13 @@ function draw() {
   }
   }
 
+function move() {
+  this.y += speed * (deltaTime / 16.666); // Ajusta el movimiento de los botones según el tiempo real
+}
+
+
 function spawnButton() {
-  if (!gameActive || buttons.length >= 10) return;
+  if (!gameActive || buttons.length >= 20) return;
 
   let lane = random(lanes);
   let buttonImage = random(buttonImages);
@@ -126,4 +135,3 @@ function mousePressed() {
 function touchStarted() {
   mousePressed();
 }
-
